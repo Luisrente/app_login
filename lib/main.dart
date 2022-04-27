@@ -6,13 +6,12 @@ void main() => runApp( const AppState());
 
 class AppState extends StatelessWidget {
   const  AppState({ Key? key }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create: ( _ ) => ProductsService(), lazy: true)
-
+        ChangeNotifierProvider( create: ( _ ) => ProductsService(), lazy: true),
+        ChangeNotifierProvider( create: ( _ ) => AuthService())
       ],
        child: const MyApp(),
     );
@@ -21,18 +20,20 @@ class AppState extends StatelessWidget {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
+      initialRoute: 'login',
       routes: {
-       'login': (_) => const LoginScreen(),
-       'home': (_) => const HomeScreen(),
-       'product': (_) => const ProductScreen()
+       'checking'  : (_) => const CheckAuthScreen(),
+       'home'      : (_) => const HomeScreen(),
+       'login'     : (_) => const LoginScreen(),
+       'product'   : (_) => const ProductScreen(),
+       'register'  : (_) => const RegisterScreen(),
       },
+      scaffoldMessengerKey: NotificationsService.messengerKey,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],
         appBarTheme: const AppBarTheme(
