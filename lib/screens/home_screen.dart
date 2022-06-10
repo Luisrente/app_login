@@ -16,10 +16,7 @@ class HomeScreen extends StatelessWidget {
 
   final productsService= Provider.of<ProductsService>(context);
   final authService= Provider.of<AuthService>(context , listen: false);
-
-  if( productsService.isLoading) return LoadingScreen();
-
-
+  if( productsService.isLoading) return const LoadingScreen();
 
   if(productsService.isLoading==true) return LoadingScreen();
     return  Scaffold(

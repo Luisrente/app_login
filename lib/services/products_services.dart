@@ -28,11 +28,8 @@ class ProductsService extends ChangeNotifier{
 
   // TODO: 
   Future<List<Product>> loadProducts() async {
-    
-    
     this.isLoading = true;
     notifyListeners();
-
     final url = Uri.https( _baseUrl, 'Products.json', {
       'auth': await storage.read(key: 'token') ?? '',
     });
@@ -44,15 +41,12 @@ class ProductsService extends ChangeNotifier{
       tempProduct.id = key;
       this.products.add(tempProduct);
     });
-
     this.isLoading= false;
     notifyListeners();
-
     return this.products;
   }
 
   Future saveOrCreateProduct( Product product) async {
- 
     isSaving = true;
     notifyListeners();
 
@@ -94,10 +88,8 @@ class ProductsService extends ChangeNotifier{
   }
 
   void updateSelectedProductImage( String path){
-    
     this.selectedProduct.picture = path;
     this.newPictureFile = File.fromUri(Uri(path: path));
-
     notifyListeners();
   }
 
